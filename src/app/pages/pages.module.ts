@@ -9,8 +9,8 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    DetailsComponent,
-    HomeComponent
+    HomeComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,
