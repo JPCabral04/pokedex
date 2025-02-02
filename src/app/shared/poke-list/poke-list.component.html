@@ -1,4 +1,5 @@
 <app-poke-search (emmitSearch)="getSearch($event)"></app-poke-search>
+<app-poke-filter (typeSelected)="filterPokemonsByType($event)"></app-poke-filter>
 
 <section class="listagem">
    <ng-template ngFor let-pokemon [ngForOf]="getAllPokemons">
@@ -21,3 +22,5 @@
       </a>
    </ng-template>
 </section>
+
+<img class="img-error" src="assets/error.png" alt="Deu erro na mostragem do pokemon"  *ngIf="apiError">

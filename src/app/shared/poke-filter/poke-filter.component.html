@@ -1,0 +1,9 @@
+<div class="poke-types">
+
+   @for (type of pokeTypes; track type) {
+      <button type="button" (click)="filterByType(type)">
+         {{type}}
+      </button>
+   }
+   
+</div>

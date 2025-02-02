@@ -85,6 +85,12 @@
 			}
 		}
 
+		.img-error{
+			display: flex;
+			margin: auto;
+			max-width: 100%;
+		}
+
 		@media (max-width: 420px) {
 			margin-top: rem-calc(10);
 

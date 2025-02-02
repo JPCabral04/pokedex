@@ -80,6 +80,12 @@ $padding: rem-calc(20);
 			}
 		}
 
+		.img-error{
+			display: flex;
+			margin: auto;
+			max-width: 100%;
+		}
+
 		@media (max-width: 400px) {
 			a {
 				width: 100% !important;

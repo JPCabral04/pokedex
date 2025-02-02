@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokeApiService } from '../../service/poke-api.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-poke-list',
@@ -13,6 +14,8 @@ export class PokeListComponent implements OnInit{
   public getAllPokemons : any;
   private setAllPokemons : any;
 
+  public apiError : boolean = false;
+
   constructor(private pokeApiService : PokeApiService){
 
   }
@@ -22,8 +25,9 @@ export class PokeListComponent implements OnInit{
       res => {
         this.setAllPokemons = res.results;
         this.getAllPokemons = this.setAllPokemons;
+      },error => {
+        this.apiError = true;
       }
-      
     )
   }
 
@@ -35,6 +39,14 @@ export class PokeListComponent implements OnInit{
     );
 
     this.getAllPokemons = filter;
-    
   }
+
+  public filterPokemonsByType(type: string) {
+    const filter = this.setAllPokemons.filter((resPokemon: any) => {
+      return resPokemon.status.types.some((resType: any) => resType.type.name === type);
+    });
+
+    this.getAllPokemons = filter;
+  }
+
 }
