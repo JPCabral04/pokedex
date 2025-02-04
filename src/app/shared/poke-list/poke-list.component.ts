@@ -55,7 +55,6 @@ export class PokeListComponent implements OnInit{
 
     this.getAllPokemons = this.setAllPokemons.filter((resPokemon: any) => {
       const pokemonTypes = resPokemon.status.types.map((resType: any) => resType.type.name);
-      console.log(pokemonTypes);
       
       return this.selectedTypes.every(selectedType => pokemonTypes.includes(selectedType));
     });
