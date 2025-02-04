@@ -8,5 +8,10 @@
       button{
          padding: 8px;
       }
+
+      button.active{
+         background-color: var(--secondary-color);
+         color: var(--branco);
+      }
    }
 }

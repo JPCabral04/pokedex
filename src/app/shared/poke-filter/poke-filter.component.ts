@@ -10,8 +10,9 @@ import { PokeApiService } from '../../service/poke-api.service';
 })
 export class PokeFilterComponent implements OnInit{
 
-  @Output() typeSelected = new EventEmitter<string>();
-  public pokeTypes : any;
+  @Output() typesSelected = new EventEmitter<string[]>();
+  public pokeTypes : string[] = [];
+  public selectedTypes : string[] = [];
 
   constructor(private pokeApiService : PokeApiService ) {
   }
@@ -25,6 +26,14 @@ export class PokeFilterComponent implements OnInit{
   }
 
   public filterByType(type : string) {
-    this.typeSelected.emit(type);
+    
+    if(this.selectedTypes.includes(type)){
+      this.selectedTypes = this.selectedTypes.filter(t => t !== type);
+    } else {
+      this.selectedTypes.push(type);
+    }
+
+    this.typesSelected.emit(this.selectedTypes);
+    
   }
 }

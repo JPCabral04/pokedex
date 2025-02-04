@@ -13,6 +13,7 @@ export class PokeListComponent implements OnInit{
 
   public getAllPokemons : any;
   private setAllPokemons : any;
+  public selectedTypes : string[] = [];
 
   public apiError : boolean = false;
 
@@ -24,7 +25,7 @@ export class PokeListComponent implements OnInit{
     this.pokeApiService.apiListAllPokemons.subscribe(
       res => {
         this.setAllPokemons = res.results;
-        this.getAllPokemons = this.setAllPokemons;
+        this.getAllPokemons = [...this.setAllPokemons];
       },error => {
         this.apiError = true;
       }
@@ -41,12 +42,24 @@ export class PokeListComponent implements OnInit{
     this.getAllPokemons = filter;
   }
 
-  public filterPokemonsByType(type: string) {
-    const filter = this.setAllPokemons.filter((resPokemon: any) => {
-      return resPokemon.status.types.some((resType: any) => resType.type.name === type);
-    });
-
-    this.getAllPokemons = filter;
+  public updateTypeFilters(types: string[]): void {
+    this.selectedTypes = types;
+    this.applyFilters();
   }
 
+  private applyFilters() {
+    if (this.selectedTypes.length === 0) {
+      this.getAllPokemons = this.setAllPokemons;
+      return;
+    }
+
+    this.getAllPokemons = this.setAllPokemons.filter((resPokemon: any) => {
+      const pokemonTypes = resPokemon.status.types.map((resType: any) => resType.type.name);
+      console.log(pokemonTypes);
+      
+      return this.selectedTypes.every(selectedType => pokemonTypes.includes(selectedType));
+    });
+  }
+
+  
 }
