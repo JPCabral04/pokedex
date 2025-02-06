@@ -17,10 +17,12 @@ export class PokeApiService {
   get apiListAllPokemons():Observable<PokemonList>{
     return this.http.get<PokemonList>(this.url).pipe(
       tap( res => {
+        console.log(res);
+        
         res.results.map( (resPokemons: Pokemon) => {
 
           this.apiGetPokemon(resPokemons.url).subscribe(
-            res => resPokemons.status  = res as PokemonStatus
+            res => resPokemons.status = res as unknown as PokemonStatus
           );
         })
       })

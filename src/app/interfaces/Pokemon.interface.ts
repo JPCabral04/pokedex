@@ -9,12 +9,21 @@ export interface Pokemon {
 }
 
 export interface PokemonStatus {
+   id: number;
+   sprites: {
+      other: {
+         dream_world: {
+            front_default: string;
+         };
+      };
+   };
    types?: {
       type: {
          name: string;
       };
    }[];
 }
+
 
 export interface PokemonType {
    results: { name: string }[];
